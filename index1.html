@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Responsive Header</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Tajawal', sans-serif;
+}
+
+body{
+  direction:rtl;
+}
+
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  color:#000000;
+
+  background: linear-gradient(
+    120deg,
+   #ffffff,
+    hsl(0, 56%, 98%),
+    #fafcff,
+    #f3fcff,
+    #d8f9f4,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+}
+
+/* لوجو */
+.logo img{
+  width:100px;
+}
+
+/* القائمة */
+.nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav a{
+  text-decoration:none;
+  color:#000000;
+  transition:.3s;
+}
+
+.nav a:hover{
+  color:#000;
+}
+
+/* dropdown */
+.dropdown{
+  position:relative;
+}
+
+.dropdown-menu{
+  position:absolute;
+  top:40px;
+  right:0;
+  background:rgba(0, 0, 0, 0.189);
+  padding:15px;
+  width:200px;
+  display:none;
+  border-radius:10px;
+}
+
+.dropdown-menu a{
+  display:block;
+  margin:8px 0;
+  color:#040404;
+}
+
+.dropdown:hover .dropdown-menu{
+  display:block;
+}
+
+/* left */
+.left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* زرار 3 ألوان */
+.btn{
+  background: linear-gradient(  #2FAF9B,
+    #2D8FB0,
+    #1E3A8A);
+  color:#000;
+  padding:8px 16px;
+  border-radius:20px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* اللغة */
+.lang-dropdown{
+  position:relative;
+}
+
+.lang-selected{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+}
+
+.lang-menu{
+  position:absolute;
+  top:35px;
+  right:0;
+  background:rgba(0, 0, 0, 0.32);
+  padding:10px;
+  display:none;
+  border-radius:8px;
+}
+
+.lang-dropdown:hover .lang-menu{
+  display:block;
+}
+
+.lang-menu a{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:#111111;
+  text-decoration:none;
+}
+
+/* زرار الموبايل */
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* 📱 موبايل */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav{
+    position:absolute;
+    top:70px;
+    right:0;
+    width:100%;
+    background:#111;
+    flex-direction:column;
+    align-items:center;
+    display:none;
+    padding:20px 0;
+  }
+
+  .nav.active{
+    display:flex;
+  }
+
+  .dropdown-menu{
+    position:static;
+    width:100%;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <!-- لوجو -->
+
+  <div class="logo">
+    <img src="WhatsApp Image 2026-04-18 at 8.52.57 PM.jpeg">
+  </div>
+
+  <!-- زرار موبايل -->
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- القائمة -->
+
+  <nav class="nav" id="navMenu">
+
+
+<a href="index.html">الرئيسية</a>
+<a href="about.html">من نحن</a>
+
+
+<div class="dropdown">
+  <a href="#">خدماتنا</a>
+
+  <div class="dropdown-menu">
+    <strong>التسويق الرقمي</strong>
+    <a href="social.html">السوشيال ميديا</a>
+    <a href="ads.html">إعلانات</a>
+
+    <hr>
+
+    <strong>حلول الويب</strong>
+    <a href="web.html">مواقع</a>
+    <a href="store.html">متاجر</a>
+
+    <hr>
+
+    <strong>التصميم</strong>
+    <a href="branding.html">هوية</a>
+    <a href="print.html">طباعة</a>
+  </div>
+</div>
+
+<a href="portfolio.html">أعمالنا</a>
+<a href="contact.html">اتصل بنا</a>
+
+
+  </nav>
+
+  <!-- يسار -->
+
+  <div class="left">
+
+
+<div class="lang-dropdown">
+  <div class="lang-selected">
+    <img src="https://flagcdn.com/w20/eg.png">
+    <span>AR</span>
+  </div>
+
+  <div class="lang-menu">
+    <a href="index.html">
+      <img src="https://flagcdn.com/w20/eg.png"> عربي
+    </a>
+
+    <a href="en.html">
+      <img src="https://flagcdn.com/w20/us.png"> English
+    </a>
+  </div>
+</div>
+
+<a href="#" class="btn">ابدأ الآن</a>
+
+
+  </div>
+
+</header>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
+
