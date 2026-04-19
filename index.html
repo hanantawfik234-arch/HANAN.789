@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+<title>مدي</title>
+
+<style>
+
+/* ===== أساسيات ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Tajawal', sans-serif;
+
+  cursor:none; /* إخفاء الماوس الأصلي */
+}
+
+.cursor{
+  width:20px;
+  height:20px;
+  border:2px solid #2FAF9B;
+  border-radius:50%;
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:all 0.25s ease;
+  z-index:9999;
+}
+
+/* تكبير + لون أزرق */
+.cursor.active{
+  width:60px;
+  height:60px;
+  background:#2D8FB0;
+  opacity:0.3;
+}
+  
+
+/* ===== الهيدر ===== */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  color:#000000;
+
+  background: linear-gradient(
+    120deg,
+   #ffffff,
+    hsl(0, 56%, 98%),
+    #fafcff,
+    #f3fcff,
+    #d8f9f4,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+}
+
+/* لوجو */
+.logo img{
+  width:100px;
+}
+
+/* القائمة */
+.nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav a{
+  text-decoration:none;
+  color:#000000;
+  transition:.3s;
+}
+
+.nav a:hover{
+  color:#000;
+}
+
+/* dropdown */
+.dropdown{
+  position:relative;
+}
+
+.dropdown-menu{
+  position:absolute;
+  top:40px;
+  right:0;
+  background:rgba(0, 0, 0, 0.189);
+  padding:15px;
+  width:200px;
+  display:none;
+  border-radius:10px;
+}
+
+.dropdown-menu a{
+  display:block;
+  margin:8px 0;
+  color:#0404043e;
+}
+
+.dropdown:hover .dropdown-menu{
+  display:block;
+}
+
+/* left */
+.left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* زرار 3 ألوان */
+.btn{
+  background: linear-gradient( 
+     #2FAF9B,
+    #2D8FB0,
+    #1E3A8A);
+  color:#000;
+  padding:8px 16px;
+  border-radius:20px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* اللغة */
+.lang-dropdown{
+  position:relative;
+}
+
+.lang-selected{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+}
+
+.lang-menu{
+  position:absolute;
+  top:35px;
+  right:0;
+  background:rgba(0, 0, 0, 0.217);
+  padding:10px;
+  display:none;
+  border-radius:8px;
+}
+
+.lang-dropdown:hover .lang-menu{
+  display:block;
+}
+
+.lang-menu a{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:#050505;
+  text-decoration:none;
+}
+
+/* زرار الموبايل */
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* 📱 موبايل */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav{
+    position:absolute;
+    top:70px;
+    right:0;
+    width:100%;
+    background:#111;
+    flex-direction:column;
+    align-items:center;
+    display:none;
+    padding:20px 0;
+  }
+
+  .nav.active{
+    display:flex;
+  }
+
+  .dropdown-menu{
+    position:static;
+    width:100%;
+  }
+
+}
+/* أساسيات */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Tajawal', sans-serif;
+}
+
+
+
+.content h1{
+  text-align:right;
+  font-weight:900;
+  font-size:100px;
+  line-height:1,5;
+
+  color:hsla(0, 0%, 0%, 0.918); /* 👈 الكلام أبيض */
+
+  padding:15px 20px;
+  border-radius:1px;
+
+  background: linear-gradient(
+    90deg,
+   #ffffff,
+    hsl(0, 56%, 98%),
+    #fafcff,
+    #f3fcff,
+    #d8f9f4,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+
+  display:inline-block;
+}
+
+.text-row{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+}
+
+/* P */
+.text-row p{
+  background:#fff;
+  padding:40px;
+  font-size:30px;
+  font-weight:300;
+  border-radius:10px;
+  margin:0;
+}
+
+/* زرار */
+.btn{
+  text-decoration:none;
+  padding:12px 20px;
+  border-radius:25px;
+
+  background: linear-gradient(
+    45deg,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+
+  color:#fff;
+  font-weight:bold;
+}
+
+/* السهم داخل الدائرة */
+.arrow-circle{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background: linear-gradient(
+    45deg,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+
+  cursor:pointer;
+
+  /* حركة الدائرة */
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* السهم نفسه */
+.arrow{
+  color:#fff;
+  font-size:18px;
+  display:inline-block;
+
+  /* حركة السهم */
+  animation: moveArrow 0.8s infinite ease-in-out;
+}
+
+/* حركة السهم يمين/شمال */
+@keyframes moveArrow{
+  0%{transform:translateX(0);}
+  50%{transform:translateX(-6px);}
+  100%{transform:translateX(0);}
+}
+
+/* نبض الدائرة */
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+  100%{transform:scale(1);}
+}
+/* 📱 موبايل */
+@media (max-width:768px){
+
+  .main-box{
+    padding:20px;
+  }
+
+  .content h1{
+    font-size:28px;
+    text-align:center;
+  }
+
+  .content p{
+    padding:20px;
+    font-size:16px;
+  }
+
+  .actions{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
+
+}
+
+
+.color-section{
+  height:70vh;
+  width:70%;
+
+  /* مزيج 8 ألوان */
+  background: linear-gradient(
+    90deg,
+   
+     #f3fcff,
+    #d8f9f4,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A ,
+     #ffffff,
+    hsl(0, 56%, 98%),
+     #fafcff,
+     #fafcff
+    
+  );
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* لو عايزة تحطي حاجة بعدين */
+.inner{
+  text-align:center;
+  color:#fff;
+  font-size:20px;
+  font-weight:300;
+}
+
+
+/* 🔥 سكشن معزول */
+.hero-block{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+
+  background:#fff;
+  padding-bottom:150px;
+}
+
+/* صورة + كلام */
+.hero-block .content{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* الصورة */
+.hero-block .icon{
+  width:70px;
+
+  animation:drop 1s ease forwards;
+}
+
+@keyframes drop{
+  0%{
+    transform:translateY(-100px);
+    opacity:0;
+  }
+  100%{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+.text{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  text-align:right;
+}
+
+.text h2{
+  font-size:50px;
+  font-weight:900;
+}
+
+.text h3{
+  font-size:40px;
+  font-weight:600;
+  color:#333;
+}
+
+.text p{
+  font-size:40px;
+  font-weight:300;
+  color:#0d0d0dbb;
+  max-width:700cqh;
+}
+/* النص */
+.hero-block .content p{
+  font-size:50px;
+  font-weight:300;
+  text-align:center;
+  max-width:700px;
+}
+
+/* الزر + السهم */
+.hero-block .cta{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* زر */
+.hero-block .btn{
+  text-decoration:none;
+  padding:12px 20px;
+  border-radius:25px;
+
+  background: linear-gradient(
+    45deg,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+
+  color:#fff;
+  font-weight:bold;
+}
+
+/* سهم */
+.hero-block .arrow-circle{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background: linear-gradient(
+    45deg,
+    #2FAF9B,
+    #2D8FB0,
+    #1E3A8A
+  );
+
+  animation:pulse 1.5s infinite;
+}
+
+/* حركة السهم */
+.hero-block .arrow{
+  color:#fff;
+  font-size:18px;
+  animation:move 0.8s infinite ease-in-out;
+}
+
+@keyframes move{
+  0%{transform:translateX(0);}
+  50%{transform:translateX(-6px);}
+  100%{transform:translateX(0);}
+}
+
+/* نبض */
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+
+/* 📱 موبايل */
+@media(max-width:768px){
+  .hero-block .content{
+    flex-direction:column;
+    text-align:center;
+  }
+}
+
+
+   .scroll-text {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #05d6c4, #0b7fcd);
+    color: rgb(249, 248, 248);
+   font-size: 32px; /* حجم أكبر للنص */
+    font-weight: bold; /* النص بخط عريض */
+    padding: 25px 0;
+  }
+  .scroll-text span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll 25s linear infinite;
+  }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <!-- لوجو -->
+
+  <div class="logo">
+    <img src="WhatsApp Image 2026-04-19 at 2.00.46 PM.jpeg">
+  </div>
+
+  <!-- زرار موبايل -->
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- القائمة -->
+
+  <nav class="nav" id="navMenu">
+
+
+<a href="index.html">الرئيسية</a>
+<a href="about.html">من نحن</a>
+
+
+<div class="dropdown">
+  <a href="#">خدماتنا</a>
+
+  <div class="dropdown-menu">
+    <strong>التسويق الرقمي</strong>
+    <a href="social.html">السوشيال ميديا</a>
+    <a href="ads.html">إعلانات</a>
+
+    <hr>
+
+    <strong>حلول الويب</strong>
+    <a href="web.html">مواقع</a>
+    <a href="store.html">متاجر</a>
+
+    <hr>
+
+    <strong>التصميم</strong>
+    <a href="branding.html">هوية</a>
+    <a href="print.html">طباعة</a>
+  </div>
+</div>
+
+<a href="portfolio.html">أعمالنا</a>
+<a href="contact.html">اتصل بنا</a>
+
+
+  </nav>
+
+  <!-- يسار -->
+
+  <div class="left">
+
+
+<div class="lang-dropdown">
+  <div class="lang-selected">
+    <img src="https://flagcdn.com/w20/eg.png">
+    <span>AR</span>
+  </div>
+
+  <div class="lang-menu">
+    <a href="index.html">
+      <img src="https://flagcdn.com/w20/eg.png"> عربي
+    </a>
+
+    <a href="en.html">
+      <img src="https://flagcdn.com/w20/us.png"> English
+    </a>
+  </div>
+</div>
+
+<a href="#" class="btn">ابدأ الآن</a>
+
+
+  </div>
+
+</header>
+
+
+<div class="main-box">
+
+  <div class="content">
+
+<h1><br>
+  نقدّم حلولًا رقمية<br>
+  متكاملة<br>
+  لتطوير ونمو أعمالك
+</h1>
+
+<div class="text-row">
+
+  <p>
+شريكك المعتمد للنجاح الرقمي. شركة<br>
+رسمية مسجلة بهيئة الاستثمار ومرخصة من <br>
+وزارة الاتصالات وتكنولوجيا المعلومات
+  </p>
+
+  <a href="page2.html" class="btn">ابدأ الآن</a>
+
+  <div class="arrow-circle">
+    <span>←</span>
+  </div>
+
+</div>
+  </div>
+</div>
+
+<div class="color-section">
+
+  <div class="inner">
+    <!-- فاضي حالياً -->
+  </div>
+</div>
+
+<div class="hero-block">
+
+  <div class="content">
+
+    <img class="icon" src="WhatsApp Image 2026-04-18 at 8.52.57 PM.jpeg">
+
+    <div class="text">
+
+      <h2>من نحن</h2>
+
+      <h3>نحن في AK MEDIA، نحول رؤيتك إلى واقع ملموس.</h3>
+
+      <p>
+   تقدم مزيجاً فريداً من الإبداع والخبرة التقنية لمساعدة أعمالك على النمو والازدهار.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="cta">
+
+    <a href="page2.html" class="btn">ابدأ الآن</a>
+
+    <div class="arrow-circle">
+      <span class="arrow">←</span>
+    </div>
+  </div>
+</div>
+
+
+  <div class="scroll-text">
+    <span>
+      تصميم وتطوير الموقع التسويق الرقمي إدارة الحسابات إنتاج المرئي تصوير الريلز 
+      تصميم وتطوير الموقع التسويق الرقمي إدارة الحسابات إنتاج المرئي تصوير الريلز 
+      تصميم وتطوير الموقع التسويق الرقمي إدارة الحسابات إنتاج المرئي تصوير الريلز
+    </span>
+  </div>
+  <div class="cursor"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+
+let isArabic = true;
+
+function toggleMenu() {
+  let menu = document.getElementById("langMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function setLang(lang) {
+  let texts = document.querySelectorAll(".lang-text");
+  let flag = document.getElementById("flag");
+  let label = document.getElementById("lang-label");
+
+  if (lang === "en") {
+    let en = [
+      "Home","About","Services",
+      "Digital Marketing","Social Media","Ads",
+      "Web Solutions","Websites","Stores",
+      "Design","Branding","Print",
+      "Work","Contact","Start Now"
+    ];
+
+    texts.forEach((el,i)=> el.innerHTML = en[i]);
+
+    document.dir = "ltr";
+    flag.src = "https://flagcdn.com/w20/us.png";
+    label.innerHTML = "EN";
+    isArabic = false;
+
+  } else {
+    let ar = [
+      "الرئيسية","من نحن","خدماتنا",
+      "التسويق الرقمي","السوشيال ميديا","إعلانات",
+      "حلول الويب","مواقع","متاجر",
+      "التصميم","هوية","طباعة",
+      "أعمالنا","اتصل بنا","ابدأ الآن"
+    ];
+
+    texts.forEach((el,i)=> el.innerHTML = ar[i]);
+
+    document.dir = "rtl";
+    flag.src = "https://flagcdn.com/w20/eg.png";
+    label.innerHTML = "AR";
+    isArabic = true;
+  }
+
+  document.getElementById("langMenu").style.display = "none";
+}
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const cursor = document.querySelector(".cursor");
+
+  document.addEventListener("mousemove", (e)=>{
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+
+  /* العناصر اللي هتكبر عندها */
+  const elements = document.querySelectorAll("a, button, .text, div");
+
+  elements.forEach(el=>{
+    el.addEventListener("mouseenter", ()=>{
+      cursor.classList.add("active");
+    });
+
+    el.addEventListener("mouseleave", ()=>{
+      cursor.classList.remove("active");
+    });
+  });
+
+});
+
+const arrowBtn = document.getElementById("arrowBtn");
+const hero = document.querySelector(".hero");
+
+arrowBtn.addEventListener("click", () => {
+  hero.classList.toggle("move");
+});
+
+function goPage(){
+  window.location.href = "page2.html";
+}
+</script>
+</body>
+</html>
